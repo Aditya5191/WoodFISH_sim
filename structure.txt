@@ -1,0 +1,50 @@
+auv_simulation_ws/                  # Your ROS 2 workspace
+├── src/
+│   ├── auv_description/            # URDF/Xacro and mesh files
+│   │   ├── launch/
+│   │   │   └── spawn_auv.launch.py
+│   │   ├── meshes/
+│   │   │   ├── auv_base.stl
+│   │   │   └── propeller.stl
+│   │   ├── urdf/
+│   │   │   └── auv.xacro
+│   │   └── package.xml
+│   │   └── CMakeLists.txt
+│
+│   ├── auv_gz_sim/                 # Plugins, world files, system integration
+│   │   ├── launch/
+│   │   │   └── sim.launch.py
+│   │   ├── worlds/
+│   │   │   └── underwater.world
+│   │   ├── config/
+│   │   │   └── buoyancy.yaml
+│   │   ├── models/
+│   │   │   └── auv_model/
+│   │   │       ├── model.sdf
+│   │   │       └── model.config
+│   │   ├── plugins/               # Custom Gazebo plugins if any
+│   │   │   └── libbuoyancy_plugin.so
+│   │   └── package.xml
+│   │   └── CMakeLists.txt
+│
+│   ├── auv_control/               # ROS 2 nodes for AUV control (teleop, autonomy)
+│   │   ├── src/
+│   │   │   └── controller_node.cpp
+│   │   ├── launch/
+│   │   │   └── control.launch.py
+│   │   ├── config/
+│   │   │   └── controller.yaml
+│   │   └── package.xml
+│   │   └── CMakeLists.txt
+│
+│   ├── auv_bringup/               # Combines all components into one launch
+│   │   ├── launch/
+│   │   │   └── auv_sim_bringup.launch.py
+│   │   └── package.xml
+│   │   └── CMakeLists.txt
+│
+├── install/
+├── build/
+├── log/
+└── setup.bash
+
