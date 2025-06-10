@@ -4,7 +4,7 @@
         <link name="base_link">
             <pose>0.0 0.0 0.0 0.0 -0.0 0.0</pose>
             <inertial>
-                <mass>3</mass>
+                <mass>0.5</mass>
                 <pose>0.0039041771157514687 4.83945660710151e-17 0.032675770247081966 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>0.06354699122990562</ixx>
@@ -42,7 +42,7 @@
         <link name="canister_m1">
             <pose>0.12499999999999992 7.753917579994428e-18 0.085 3.141592653589793 3.8857805861880495e-15 3.141592653589793</pose>
             <inertial>
-                <mass>0.5157991692851864</mass>
+                <mass>1</mass>
                 <pose>3.4008288892805853e-09 5.983913413592166e-09 0.03420084938084101 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>0.0005301765989691295</ixx>
@@ -81,7 +81,7 @@
         <link name="canister_m2">
             <pose>-0.12500000000000008 7.105427357601002e-17 0.08499999999999996 3.141592653589793 3.8857805861880495e-15 3.141592653589793</pose>
             <inertial>
-                <mass>0.5157991692851864</mass>
+                <mass>1</mass>
                 <pose>3.4008289070441537e-09 5.983913413592166e-09 0.03420084938084101 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>0.0005301765989691293</ixx>
@@ -119,7 +119,7 @@
         <link name="cannister_s1">
             <pose>-0.03893749999999983 0.1550000000000002 0.035 -1.5707963267948966 -1.2816629302294903e-29 -1.5707963267948986</pose>
             <inertial>
-                <mass>0.49238155827613944</mass>
+                <mass>1</mass>
                 <pose>0.022840941856876084 1.2336246340449517e-11 0.031299986832562424 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>0.0004709392142269556</ixx>
@@ -153,11 +153,11 @@
                 </geometry>
                 <pose>0.035 0.0 0.025 0.0 0.0 0.0</pose>
             </collision>
-        </link>1.5707963267948966
+        </link>
         <link name="cannister_s2">
             <pose>-0.038937500000000076 -0.15499999999999992 0.03500000000000029 1.5707963267948968 6.7412477214656915e-31 1.5707963267948946</pose>
             <inertial>
-                <mass>0.49238155827613944</mass>
+                <mass>1</mass>
                 <pose>0.022840941856876056 1.2336265365649534e-11 0.03129998683256243 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>0.00047093921422695407</ixx>
@@ -195,7 +195,7 @@
         <link name="propeller_m1">
             <pose>0.12500000000000008 7.753917579994408e-18 0.020000000000000035 3.141592653589793 -7.771561172376099e-15 -4.930380657631324e-32</pose>
             <inertial>
-                <mass>0.025723331591157014</mass>
+                <mass>1</mass>
                 <pose>-1.5283076074606945e-06 -1.3641272198259223e-06 0.014499375705327607 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>1.0294504067545145e-05</ixx>
@@ -233,7 +233,7 @@
         <link name="propeller_m2">
             <pose>-0.12499999999999992 7.105427357601e-17 0.02 3.141592653589793 -7.771561172376099e-15 -4.930380657631324e-32</pose>
             <inertial>
-                <mass>0.025723331591157014</mass>
+                <mass>1</mass>
                 <pose>-1.528307607442931e-06 -1.3641272198259223e-06 0.014499375705327609 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>1.0294504067545144e-05</ixx>
@@ -271,7 +271,7 @@
         <link name="propeller_s1">
             <pose>0.026062500000000082 0.15499999999999997 0.035 1.9567680809016747e-15 1.5707963267948966 0</pose>
             <inertial>
-                <mass>0.025723331591157014</mass>
+                <mass>1</mass>
                 <pose>-1.528307607430613e-06 -1.3641272198299745e-06 0.014499375705327609 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>1.0294504067545076e-05</ixx>
@@ -299,17 +299,16 @@
             </visual>
             <collision name="propeller_s1_collision">
                 <geometry>
-                    <mesh>
-                        <uri>meshes/propeller_s1.stl</uri>
-                        <scale>0.001 0.001 0.001</scale>
-                    </mesh>
+                    <box>
+                        <size>0.13 0.13 0.0</size>                      
+                    </box>
                 </geometry>
             </collision>
         </link>
         <link name="propeller_s2">
             <pose>0.026062499999999832 -0.15500000000000008 0.03500000000000029 1.9567680809016727e-15 1.5707963267948966 0</pose>
             <inertial>
-                <mass>0.025723331591157014</mass>
+                <mass>1</mass>
                 <pose>-1.5283076074297235e-06 -1.3641272197944474e-06 0.014499375705327609 0.0 0.0 0.0</pose>
                 <inertia>
                     <ixx>1.0294504067545293e-05</ixx>
@@ -337,10 +336,9 @@
             </visual>
             <collision name="propeller_s2_collision">
                 <geometry>
-                    <mesh>
-                        <uri>meshes/propeller_s2.stl</uri>
-                        <scale>0.001 0.001 0.001</scale>
-                    </mesh>
+                    <box>
+                        <size>0.13 0.13 0.0</size>                      
+                    </box>
                 </geometry>
             </collision>
         </link>
@@ -398,30 +396,34 @@
         </joint>
 
         <!-- Hydrodynamic system-->
-    <!-- <plugin
-      filename="gz-sim-hydrodynamics-system"
-      name="gz::sim::systems::Hydrodynamics">
-        <disable_added_mass>true</disable_added_mass>
-        <link_name>base_link</link_name>
-        <xDotU>-3.2</xDotU>
-        <yDotV>-200</yDotV>
-        <zDotW>-200</zDotW>
-        <kDotP>0</kDotP>
-        <mDotQ>-0.0</mDotQ>
-        <nDotR>-0</nDotR>
-        <xUU>-0</xUU>
-        <xU>0</xU>
-        <yVV>-0</yVV>
-        <yV>0</yV>
-        <zWW>-0</zWW>
-        <zW>0</zW>
-        <kPP>-0</kPP>
-        <kP>0</kP>
-        <mQQ>-0</mQQ>
-        <mQ>0</mQ>
-        <nRR>-0</nRR>
-        <nR>0</nR>
-    </plugin> -->
+    <plugin
+                filename="gz-sim-hydrodynamics-system"
+                name="gz::sim::systems::Hydrodynamics">
+                <!-- <disable_added_mass>true</disable_added_mass> -->
+                <link_name>base_link</link_name>
+
+                <!-- Linear drag (velocity-dependent) -->
+                <xU>-100</xU>
+                <yV>-100</yV>
+                <zW>-100</zW>
+
+                <!-- Quadratic drag (speed squared) -->
+                <xUabsU>-10</xUabsU>
+                <yVabsV>-10</yVabsV>
+                <zWabsW>-10</zWabsW>
+
+                <!-- Angular drag -->
+                <kP>-0.02</kP>
+                <mQ>-0.02</mQ>
+                <nR>-0.02</nR>
+
+                <!-- Quadratic angular drag -->
+                <kPabsP>-0.5</kPabsP>
+                <mQabsQ>-0.5</mQabsQ>
+                <nRabsR>-0.5</nRabsR>
+                
+            </plugin>
+    
     <plugin
         filename="gz-sim-thruster-system"
         name="gz::sim::systems::Thruster">
