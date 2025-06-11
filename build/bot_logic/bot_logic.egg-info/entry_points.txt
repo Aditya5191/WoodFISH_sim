@@ -1,0 +1,2 @@
+[console_scripts]
+image_processing = bot_logic.image_processing:main

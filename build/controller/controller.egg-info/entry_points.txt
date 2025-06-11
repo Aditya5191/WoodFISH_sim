@@ -1,0 +1,2 @@
+[console_scripts]
+thruster_controller = controller.thruster_controller:main

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="AUV">
+
+  <!-- Thruster Plugin for Propeller S1 (T1) -->
+  <gazebo>
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+        <topic>thrusters/t1/thrust</topic>
+        <joint_name>cannister_s1_Revolute-7</joint_name>
+        <thrust_coefficient>1</thrust_coefficient>
+        <fluid_density>1000</fluid_density>
+        <propeller_diameter>0.13</propeller_diameter>
+    </plugin>
+  </gazebo>
+
+  <!-- Thruster Plugin for Propeller S2 (T2) -->
+  <gazebo>
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+        <topic>thrusters/t2/thrust</topic>
+        <joint_name>cannister_s2_Revolute-8</joint_name>
+        <thrust_coefficient>1</thrust_coefficient>
+        <fluid_density>1000</fluid_density>
+        <propeller_diameter>0.13</propeller_diameter>
+    </plugin>
+  </gazebo>
+
+  <!-- Thruster Plugin for Propeller M2 (T3) -->
+  <gazebo>
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+        <topic>thrusters/t3/thrust</topic>
+        <joint_name>canister_m2_Revolute-5</joint_name>
+        <thrust_coefficient>1</thrust_coefficient>
+        <fluid_density>1000</fluid_density>
+        <propeller_diameter>0.13</propeller_diameter>
+    </plugin>
+  </gazebo>
+
+  <!-- Thruster Plugin for Propeller M1 (T4) -->
+  <gazebo>
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+        <topic>thrusters/t4/thrust</topic>
+        <joint_name>canister_m1_Revolute-6</joint_name>
+        <thrust_coefficient>1</thrust_coefficient>
+        <fluid_density>1000</fluid_density>
+        <propeller_diameter>0.13</propeller_diameter>
+    </plugin>
+  </gazebo>
+  
+  
+  <!-- Optional: Hydrodynamics -->
+  <gazebo>
+    <plugin
+                filename="gz-sim-hydrodynamics-system"
+                name="gz::sim::systems::Hydrodynamics">
+                <!-- <disable_added_mass>true</disable_added_mass> -->
+                <link_name>base_link</link_name>
+
+                <!-- <xDotU> 1.986 </xDotU> 	
+                <yDotV> 3.148 </yDotV>	 -->
+                <!-- <zDotW> -1 </zDotW> -->
+                <!-- <kDotP> 0.0075 </kDotP>  
+                <mDotQ> 0.01 </mDotQ>  
+                <nDotR> 0.0273 </nDotR> -->
+
+                <!-- Linear drag (velocity-dependent) -->
+                <xU>-5</xU>
+                <yV>-5</yV>
+                <zW>-5</zW>
+
+                <!-- Quadratic drag (speed squared) -->
+                <xUabsU>-5</xUabsU>
+                <yVabsV>-5</yVabsV>
+                <zWabsW>-5</zWabsW>
+
+                <!-- Angular drag -->
+                <kP>-10</kP>
+                <mQ>-10</mQ>
+                <nR>-10</nR>
+
+                <!-- Quadratic angular drag -->
+                <kPabsP>-0.5</kPabsP>
+                <mQabsQ>-0.5</mQabsQ>
+                <nRabsR>-0.5</nRabsR>
+                
+            </plugin>
+    
+  </gazebo>
+
+</robot>
