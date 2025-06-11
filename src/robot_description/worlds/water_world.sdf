@@ -15,32 +15,18 @@
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>pool.dae</uri>
+              <uri>pool/pool.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <mesh>
-              <uri>pool.dae</uri>
+              <uri>pool/pool.dae</uri>
+              <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
-         <material>
-          <!-- <diffuse>1.0 1.0 1.0</diffuse>
-          <specular>1.0 1.0 1.0</specular>
-          <pbr>
-            <metal>
-              <albedo_map>1K-pool_tiles-diffuse.jpg</albedo_map>
-            <normal_map>1K-pool_tiles-normal.jpg</normal_map>
-            <metallic_map>1K-pool_tiles-specular.jpg</metallic_map>
-            <roughness_map>1K-pool_tiles-ao.jpg</roughness_map>
-            </metal>
-          </pbr> -->
-          <script>
-            <uri>PoolTilesMaterial.material</uri>
-            <name>tethys/Tethys_Diffuse</name>
-          </script>
-        </material>
         </visual>
       </link>
     </model>

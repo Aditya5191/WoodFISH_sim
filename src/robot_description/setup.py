@@ -15,20 +15,21 @@ setup(
         # Install model files
         ('share/' + package_name + '/model', glob('model/*')),
 
+        # Install meshes
         ('share/' + package_name + '/meshes', glob('meshes/*')),
 
-        # ('share/' + package_name + '/model/meshes', glob('model/meshes/*')),
-
-        # Install parameter files (including bridge_params.yaml)
+        # Install parameter files
         ('share/' + package_name + '/parameters', glob('parameters/*')),
+
+        # Install world files (specifically .world files)
+        ('share/' + package_name + '/worlds', glob('worlds/*.sdf')),
+
+        # Install contents of worlds/pool/
+        ('share/' + package_name + '/worlds/pool', glob('worlds/pool/*')),
         
-        
-        ('share/' + package_name + '/worlds', glob('worlds/*')),
-        
+        # Required standard entries
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-
-        # Optionally, include other directories or files as needed
     ],
     install_requires=['setuptools'],
     zip_safe=True,
