@@ -1,36 +1,71 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
   <world name="water_world">
-    <!-- <include>
-      <pose>0 0 0 0 0 0</pose>
-      <uri>AUV</uri>
-    </include> -->
+
+    <!-- Sun Light -->
+    <include>
+      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Sun</uri> 
+    </include>
+
+    <!-- Pool Model -->
+    <model name="pool">
+      <static>true</static>
+      <pose>0 0 -1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <uri>pool.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>pool.dae</uri>
+            </mesh>
+          </geometry>
+         <material>
+          <!-- <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>1K-pool_tiles-diffuse.jpg</albedo_map>
+            <normal_map>1K-pool_tiles-normal.jpg</normal_map>
+            <metallic_map>1K-pool_tiles-specular.jpg</metallic_map>
+            <roughness_map>1K-pool_tiles-ao.jpg</roughness_map>
+            </metal>
+          </pbr> -->
+          <script>
+            <uri>PoolTilesMaterial.material</uri>
+            <name>tethys/Tethys_Diffuse</name>
+          </script>
+        </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Buoyancy Plugin -->
     <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
       <graded_buoyancy>
-          <default_density>1000</default_density>
-          <density_change>
-            <above_depth>0</above_depth>
-            <density>1</density>
-          </density_change>
+        <default_density>1000</default_density>
+        <density_change>
+          <above_depth>0</above_depth>
+          <density>1</density>
+        </density_change>
       </graded_buoyancy>
-      <!-- <uniform_fluid_density>1000</uniform_fluid_density> -->
-
     </plugin>
+
+    <!-- Physics -->
     <physics name="1ms" type="ode">
-    <max_step_size>0.0005</max_step_size>
-    <real_time_factor>1.0</real_time_factor>
-  </physics>
-  <plugin
-    filename="gz-sim-physics-system"
-    name="gz::sim::systems::Physics">
-  </plugin>
-  <plugin
-    filename="gz-sim-user-commands-system"
-    name="gz::sim::systems::UserCommands">
-  </plugin>
-  <plugin
-    filename="gz-sim-scene-broadcaster-system"
-    name="gz::sim::systems::SceneBroadcaster">
-  </plugin>
+      <max_step_size>0.0005</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- System Plugins -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+
   </world>
 </sdf>
