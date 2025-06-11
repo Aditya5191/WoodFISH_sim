@@ -3,96 +3,73 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64, Float64MultiArray
+import threading
 
 class ThrusterController(Node):
     def __init__(self):
         super().__init__('thruster_controller')
         
         # ---- ALLOCATING THRUSTER NODES ---- 
-
         self.t1_ros_pub = self.create_publisher(Float64, '/thrusters/t1/thrust', 10)
         self.t2_ros_pub = self.create_publisher(Float64, '/thrusters/t2/thrust', 10)
         self.t3_ros_pub = self.create_publisher(Float64, '/thrusters/t3/thrust', 10)
         self.t4_ros_pub = self.create_publisher(Float64, '/thrusters/t4/thrust', 10)
 
-        
-        # ---- TSUP ACTS AS THE ULTIMATE CONTROL THRUSTER NODE ----
-
-        self.tsup_sub = self.create_subscription(
-            Float64MultiArray,
-            '/cmd_tsup',
-            self.tsup_callback,
-            10
-        )
-        
-        # ---- HARDCODED PARAMETER ----
-
+        # ---- CURRENT VALUES FOR CONTINUOUS PUBLISHING ----
+        self.current_thrusts = [0.0, 0.0, 0.0, 0.0]
         self.max_thrust = 120.0
         
-        # ---- WHEN NO MSG IS PUBLISHED ----
-
-        self.current_thrusts = [0.0, 0.0, 0.0, 0.0]
+        # ---- CONTINUOUS PUBLISHING TIMER (10Hz) ----
+        self.publish_timer = self.create_timer(0.1, self.continuous_publish)
         
-        # ---- SAFETY ----
+        # ---- INTERACTIVE INPUT THREAD ----
+        self.input_thread = threading.Thread(target=self.input_handler, daemon=True)
+        self.input_thread.start()
 
-        self.last_command_time = self.get_clock().now()
-        self.command_timeout = 1.0
-        self.safety_timer = self.create_timer(0.1, self.safety_check)
+        # ---- LOGS ----
+        self.get_logger().info('Thrusters Initialized')
+        self.get_logger().info('Enter thruster values: ')
+        self.get_logger().info('Ctrl+C to exit')
+        print("TSUP> ", end="", flush=True)
+
+    def continuous_publish(self):
         
-        # ---- LOGS FOR DEBUGGING IF SOMETHING FUCKED UP ----
+        # ---- Continuously publish current thruster values (WITH NO LOGGING) ----
 
-        self.get_logger().info('Thrusters Initializing')
-        self.get_logger().info('Thruster Mapping:')
-        self.get_logger().info('  - T1 → S1 (Right side thruster)')
-        self.get_logger().info('  - T2 → S2 (Left side thruster)')
-        self.get_logger().info('  - T3 → M2 (Rear main thruster)')
-        self.get_logger().info('  - T4 → M1 (Front main thruster)')
-        self.get_logger().info('Control Topic: /cmd_tsup [T1, T2, T3, T4]')
-        self.get_logger().info('Publishing directly to /AUV/thrusters/tX/thrust topics')
+        t1 = max(-self.max_thrust, min(self.max_thrust, self.current_thrusts[0]))
+        t2 = max(-self.max_thrust, min(self.max_thrust, self.current_thrusts[1]))
+        t3 = max(-self.max_thrust, min(self.max_thrust, self.current_thrusts[2]))
+        t4 = max(-self.max_thrust, min(self.max_thrust, self.current_thrusts[3]))
+        
+        self.t1_ros_pub.publish(Float64(data=float(t1)))
+        self.t2_ros_pub.publish(Float64(data=float(t2)))
+        self.t3_ros_pub.publish(Float64(data=float(t3)))
+        self.t4_ros_pub.publish(Float64(data=float(t4)))
     
-    def publish_thruster_forces(self, t1_force, t2_force, t3_force, t4_force):
+    def input_handler(self):
 
-        # ---- CLAMPING FORCE FOR MAX FORCE ----
-
-        t1_force = max(-self.max_thrust, min(self.max_thrust, t1_force))
-        t2_force = max(-self.max_thrust, min(self.max_thrust, t2_force))
-        t3_force = max(-self.max_thrust, min(self.max_thrust, t3_force))
-        t4_force = max(-self.max_thrust, min(self.max_thrust, t4_force))
-        
-        # ---- PUBLISHES ----
-
-        self.t1_ros_pub.publish(Float64(data=float(t1_force)))
-        self.t2_ros_pub.publish(Float64(data=float(t2_force)))
-        self.t3_ros_pub.publish(Float64(data=float(t3_force)))
-        self.t4_ros_pub.publish(Float64(data=float(t4_force)))
-        
-        # ---- REAL TIME SIM ----
-
-        self.current_thrusts = [t1_force, t2_force, t3_force, t4_force]
-        self.last_command_time = self.get_clock().now()
-        
-        # ---- LOGGING ----
-
-        self.get_logger().info(
-            f'T1: {t1_force:.1f}N, T2: {t2_force:.1f}N, '
-            f'T3: {t3_force:.1f}N, T4: {t4_force:.1f}N'
-        )
-    
-    def tsup_callback(self, msg):
-        if len(msg.data) != 4:
-            self.get_logger().error(f'TSUP needs 4 values, got {len(msg.data)}')
-            return
-        
-        self.publish_thruster_forces(msg.data[0], msg.data[1], msg.data[2], msg.data[3])
-    
-    def safety_check(self):
-        
-        # ---- STOP IFF NO COMMANDS RECIEVED ----
-
-        time_since_last = (self.get_clock().now() - self.last_command_time).nanoseconds / 1e9
-        if time_since_last > self.command_timeout and any(t != 0.0 for t in self.current_thrusts):
-            self.publish_thruster_forces(0.0, 0.0, 0.0, 0.0)
-            self.get_logger().warn('Command timeout - stopping thrusters')
+        while rclpy.ok():
+            try:
+                user_input = input().strip()
+                
+                if user_input:
+                    try:
+                        values = user_input.split()
+                        if len(values) == 4:
+                            t1, t2, t3, t4 = map(float, values)
+                            self.current_thrusts = [t1, t2, t3, t4]
+                            print(f"Set: T1={t1}, T2={t2}, T3={t3}, T4={t4}")
+                        else:
+                            print("Enter 4 values: T1 T2 T3 T4")
+                    except ValueError:
+                        print("Invalid input. Use numbers only.")
+                
+                print("TSUP> ", end="", flush=True)
+            
+            except (EOFError, KeyboardInterrupt):
+                break
+            except Exception:
+                pass
 
 def main(args=None):
     rclpy.init(args=args)
@@ -101,8 +78,9 @@ def main(args=None):
     try:
         rclpy.spin(controller)
     except KeyboardInterrupt:
-        controller.get_logger().info('Shutting down gracefully, I suppose')
-        controller.publish_thruster_forces(0.0, 0.0, 0.0, 0.0)
+        print("\nKilling Myself")
+        controller.current_thrusts = [0.0, 0.0, 0.0, 0.0]
+        controller.continuous_publish()
     finally:
         controller.destroy_node()
         rclpy.shutdown()
