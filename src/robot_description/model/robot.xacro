@@ -22,8 +22,8 @@
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001" />
             </geometry>
-            <material name="base_link_material">
-                <color rgba="0.5 0.5 0.5 1.0"/>
+            <material name="yellow_material">
+                <color rgba="1.0 1.0 0.0 1.0"/>
             </material>
         </visual>
         <collision name="base_link_collision">
@@ -44,8 +44,8 @@
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/canister_m1.stl" scale="0.001 0.001 0.001" />
             </geometry>
-            <material name="base_link_material">
-                <color rgba="0.5 0.5 0.5 1.0"/>
+            <material name="black_material">
+                <color rgba="0.0 0.0 0.0 1.0"/>
             </material>
         </visual>
         <collision name="canister_m1_collision">
@@ -66,8 +66,8 @@
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/canister_m2.stl" scale="0.001 0.001 0.001" />
             </geometry>
-            <material name="base_link_material">
-                <color rgba="0.5 0.5 0.5 1.0"/>
+            <material name="black_material">
+                <color rgba="0.0 0.0 0.0 1.0"/>
             </material>
         </visual>
         <collision name="canister_m2_collision">
@@ -88,6 +88,9 @@
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/cannister_s1.stl" scale="0.001 0.001 0.001" />
             </geometry>
+            <material name="black_material">
+                <color rgba="0.0 0.0 0.0 1.0"/>
+            </material>
         </visual>
         <collision name="cannister_s1_collision">
             <origin xyz="-0.04393749999999983 0.0 0.0700000000000002" rpy="1.2246467991473532e-16 1.5707963267948946 0" />
@@ -107,6 +110,9 @@
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/cannister_s2.stl" scale="0.001 0.001 0.001" />
             </geometry>
+            <material name="black_material">
+                <color rgba="0.0 0.0 0.0 1.0"/>
+            </material>
         </visual>
         <collision name="cannister_s2_collision">
             <origin xyz="-0.04393750000000008 2.842170943040401e-16 0.06999999999999991" rpy="1.2246467991473527e-16 1.5707963267948946 0" />
