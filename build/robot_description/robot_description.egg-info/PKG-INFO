@@ -1,7 +1,0 @@
-Metadata-Version: 2.1
-Name: robot-description
-Version: 0.0.0
-Summary: ROS 2 package for robot description and simulation setup
-Maintainer: aditya
-Maintainer-email: aditya.jemshetty@gmail.com
-License: TODO: License declaration

@@ -79,12 +79,23 @@ def generate_launch_description():
             ],
     )
 
+
+    thruster_controller_node = Node(
+        package='controller',
+        executable='thruster_controller',
+        name='thruster_controller',
+        output='screen',
+    )
+
+
+
     LaunchDescriptionObject=LaunchDescription()
     #add all the nodes to the launch description
     LaunchDescriptionObject.add_action(gazeboLaunch)
     LaunchDescriptionObject.add_action(spawnModelNodeGazebo)
     LaunchDescriptionObject.add_action(nodeRobotStatePublisher)
     LaunchDescriptionObject.add_action(start_gazebo_ros_bridge_cmd)
+    LaunchDescriptionObject.add_action(thruster_controller_node)  
     
     #return the launch description
     return LaunchDescriptionObject

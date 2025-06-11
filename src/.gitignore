@@ -1,0 +1,28 @@
+# Build and installation files
+build/
+dist/
+*.egg-info/
+PKG-INFO
+zip-safe
+install.log
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ROS build artifacts
+devel/
+logs/
+.catkin_workspace
+
+# IDE and editor files
+.vscode/
+*.swp
+*.swo
+*~
+
+# System files
+.DS_Store
+Thumbs.db
