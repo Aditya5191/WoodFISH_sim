@@ -8,12 +8,13 @@ class ThrusterController(Node):
     def __init__(self):
         super().__init__('thruster_controller')
         
-        # ---- ALLOCATING THRUSTER NODES ----
+        # ---- ALLOCATING THRUSTER NODES ---- 
 
-        self.t1_ros_pub = self.create_publisher(Float64, '/AUV/thrusters/t1/thrust', 10)
-        self.t2_ros_pub = self.create_publisher(Float64, '/AUV/thrusters/t2/thrust', 10)
-        self.t3_ros_pub = self.create_publisher(Float64, '/AUV/thrusters/t3/thrust', 10)
-        self.t4_ros_pub = self.create_publisher(Float64, '/AUV/thrusters/t4/thrust', 10)
+        self.t1_ros_pub = self.create_publisher(Float64, '/thrusters/t1/thrust', 10)
+        self.t2_ros_pub = self.create_publisher(Float64, '/thrusters/t2/thrust', 10)
+        self.t3_ros_pub = self.create_publisher(Float64, '/thrusters/t3/thrust', 10)
+        self.t4_ros_pub = self.create_publisher(Float64, '/thrusters/t4/thrust', 10)
+
         
         # ---- TSUP ACTS AS THE ULTIMATE CONTROL THRUSTER NODE ----
 
@@ -26,7 +27,7 @@ class ThrusterController(Node):
         
         # ---- HARDCODED PARAMETER ----
 
-        self.max_thrust = 50.0
+        self.max_thrust = 120.0
         
         # ---- WHEN NO MSG IS PUBLISHED ----
 
@@ -47,9 +48,9 @@ class ThrusterController(Node):
         self.get_logger().info('  - T3 → M2 (Rear main thruster)')
         self.get_logger().info('  - T4 → M1 (Front main thruster)')
         self.get_logger().info('Control Topic: /cmd_tsup [T1, T2, T3, T4]')
+        self.get_logger().info('Publishing directly to /AUV/thrusters/tX/thrust topics')
     
     def publish_thruster_forces(self, t1_force, t2_force, t3_force, t4_force):
-
 
         # ---- CLAMPING FORCE FOR MAX FORCE ----
 
