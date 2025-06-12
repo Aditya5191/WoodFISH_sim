@@ -39,6 +39,8 @@ setup(
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [],
+        'console_scripts': [
+            'image_processing = robot_description.image_processing:main',
+        ],
     },
 )

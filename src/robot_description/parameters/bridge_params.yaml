@@ -82,11 +82,11 @@
 #   direction: "ROS_TO_GZ"
 
 # # #gz topic published by camera plugin
-# - ros_topic_name: "camera/image_raw"
-#   gz_topic_name: "/camera/image"
-#   ros_type_name: "sensor_msgs/msg/Image"
-#   gz_type_name: "gz.msgs.Image"
-#   direction: "GZ_TO_ROS"
+- ros_topic_name: "camera/image_raw"
+  gz_topic_name: "/camera/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: "GZ_TO_ROS"
 
 # # gz topic published by LiDAR plugin
 # - ros_topic_name: "/scan"
