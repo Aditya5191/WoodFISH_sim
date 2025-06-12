@@ -14,10 +14,20 @@ to launch the file :
 
 ros2 launch robot_description gazebo_model.launch.py
 
-to make use of the thrusters :
+to make the bot move around in the pool :
 
 in another terminal
 
-ros2 topic pub /cmd_tsup std_msgs/msg/Float64MultiArray "data: [0.0, 0.0, 30.0, 30.0]" -- example
+ros2 run controller teleop_auv_keyboard
 
-first check in ros2 topic list and gz topic list if thruster nodes exist and accordingly change value as needed.
+a layout will open in the terminal screen
+
+q -> ascent
+w -> forward
+e -> descent
+
+a-> left
+s-> stop
+d -> right
+
+x -> backward
