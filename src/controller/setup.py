@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'controller'
 
@@ -21,6 +23,7 @@ setup(
     entry_points={
         'console_scripts': [
             'thruster_controller = controller.thruster_controller:main',
+            'teleop_auv_keyboard = controller.teleop_auv_keyboard:main',  
         ],
     },
 )
