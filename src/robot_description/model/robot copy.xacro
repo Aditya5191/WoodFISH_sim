@@ -6,11 +6,16 @@
 
 
   <!-- Base Link -->
-    <link name="base_link">
+ <link name="base_link">
         <inertial>
-            <origin xyz="0.003846863054427738 6.357883287024561e-17 0.032981473893636044" rpy="0.0 0.0 0.0" />
-            <mass value="1.1718649526217775" />
-            <inertia ixx="0.004180183045386648" iyy="0.012071423538137577" izz="0.01536721134366918" ixy="3.2668458710929556e-18" iyz="-1.2679790039631697e-18" ixz="-9.099523743467096e-06" />
+            <origin xyz="0.0039041771157514687 4.83945660710151e-17 0.032675770247081966" rpy="0.0 0.0 0.0" />
+            <mass value="4.6" />
+            <inertia ixx="0.005056" 
+                    iyy="0.014706" 
+                    izz="0.018702" 
+                    ixy="3.198395135761321e-18" 
+                    iyz="-1.899389350018541e-18" 
+                    ixz="-1.278e-05" />
         </inertial>
         <visual name="base_link_visual">
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -22,10 +27,10 @@
             </material>
         </visual>
         <collision name="base_link_collision">
-            <origin xyz="0.0 0.0 0.035" rpy="0.0 0.0 0.0" />
-            <geometry>
-                    <box size="0.42 0.17 0.07" /> 
-            </geometry>
+            <origin xyz="0.0 0.0 0.042675770247081966" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <box size="0.42 0.17 0.07"/>
+                </geometry>
         </collision>
     </link>
     <link name="canister_m1">
@@ -46,11 +51,8 @@
         <collision name="canister_m1_collision">
             <origin xyz="-8.881784197001253e-17 7.753917579994428e-18 0.015" rpy="3.141592653589793 3.8857805861880495e-15 3.141592653589793" />
             <geometry>
-                <mesh filename="file://$(find robot_description)/meshes/canister_m1.stl" scale="0.001 0.001 0.001" />
-            </geometry>
-            <material name="black_material">
-                <color rgba="0.0 0.0 0.0 1.0"/>
-            </material>
+                    <cylinder radius="0.046" length="0.0"/> 
+                </geometry>
         </collision>
     </link>
     <link name="canister_m2">
@@ -77,12 +79,12 @@
     </link>
     <link name="cannister_s1">
         <inertial>
-            <origin xyz="0.012362486832562549 1.2336265342582919e-11 0.047159058143124" rpy="0.0 -0.0 0.0" />
+            <origin xyz="-0.012637513167437407 1.2336256460798722e-11 0.04715905814312407" rpy="0.0 -0.0 0.0" />
             <mass value="0.06648719130862521" />
-            <inertia ixx="7.33445712441964e-05" iyy="9.798304135825563e-05" izz="6.359179198478625e-05" ixy="2.52229335508114e-14" iyz="2.0977956784878904e-14" ixz="1.5222639558599125e-06" />
+            <inertia ixx="7.334457124419662e-05" iyy="9.798304135825607e-05" izz="6.359179198478623e-05" ixy="2.52229335508114e-14" iyz="2.0977956784878904e-14" ixz="1.5222639558598583e-06" />
         </inertial>
         <visual name="cannister_s1_visual">
-            <origin xyz="-0.018937499999999875 8.881784197001253e-18 0.07000000000000013" rpy="1.2246467991473527e-16 1.5707963267948946 0" />
+            <origin xyz="-0.04393749999999983 0.0 0.0700000000000002" rpy="1.2246467991473532e-16 1.5707963267948946 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/cannister_s1.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -91,7 +93,7 @@
             </material>
         </visual>
         <collision name="cannister_s1_collision">
-            <origin xyz="-0.018937499999999875 8.881784197001253e-18 0.07000000000000013" rpy="1.2246467991473527e-16 1.5707963267948946 0" />
+            <origin xyz="-0.04393749999999983 0.0 0.0700000000000002" rpy="1.2246467991473532e-16 1.5707963267948946 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/cannister_s1.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -99,12 +101,12 @@
     </link>
     <link name="cannister_s2">
         <inertial>
-            <origin xyz="0.012362486832562357 1.2336260901690821e-11 0.047159058143124" rpy="0.0 -0.0 0.0" />
+            <origin xyz="-0.012637513167437565 1.2336536237000928e-11 0.04715905814312393" rpy="0.0 -0.0 0.0" />
             <mass value="0.06648719130862521" />
-            <inertia ixx="7.334457124419619e-05" iyy="9.798304135825563e-05" izz="6.359179198478616e-05" ixy="2.52229335508114e-14" iyz="2.0977848364661655e-14" ixz="1.5222639558598312e-06" />
+            <inertia ixx="7.334457124419619e-05" iyy="9.798304135825563e-05" izz="6.359179198478615e-05" ixy="2.522293016267961e-14" iyz="2.097779415455303e-14" ixz="1.5222639558598854e-06" />
         </inertial>
         <visual name="cannister_s2_visual">
-            <origin xyz="-0.01893750000000016 8.881784197001253e-18 0.06999999999999998" rpy="1.2246467991473527e-16 1.5707963267948946 0" />
+            <origin xyz="-0.04393750000000008 2.842170943040401e-16 0.06999999999999991" rpy="1.2246467991473527e-16 1.5707963267948946 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/cannister_s2.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -113,7 +115,7 @@
             </material>
         </visual>
         <collision name="cannister_s2_collision">
-            <origin xyz="-0.01893750000000016 8.881784197001253e-18 0.06999999999999998" rpy="1.2246467991473527e-16 1.5707963267948946 0" />
+            <origin xyz="-0.04393750000000008 2.842170943040401e-16 0.06999999999999991" rpy="1.2246467991473527e-16 1.5707963267948946 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/cannister_s2.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -159,18 +161,18 @@
     </link>
     <link name="propeller_s1">
         <inertial>
-            <origin xyz="0.0071370406085116845 -6.479110560242418e-07 7.258911269936163e-07" rpy="0.0 -0.0 0.0" />
+            <origin xyz="0.007137040608511724 -6.479110559176604e-07 7.258911269980572e-07" rpy="0.0 -0.0 0.0" />
             <mass value="0.007313123520405363" />
-            <inertia ixx="2.712594343423771e-06" iyy="1.563867688240084e-06" izz="1.5636332278421762e-06" ixy="2.0918329094181572e-11" iyz="-9.069929488312927e-11" ixz="-2.4984636118352034e-11" />
+            <inertia ixx="2.712594343423717e-06" iyy="1.563867688240084e-06" izz="1.563633227842149e-06" ixy="2.0918329114510362e-11" iyz="-9.069929487635301e-11" ixz="-2.4984636123434232e-11" />
         </inertial>
         <visual name="propeller_s1_visual">
-            <origin xyz="-0.0049999999999999645 -1.4210854715202004e-16 -8.881784197001253e-18" rpy="1.956768080901675e-15 1.5707963267948966 0" />
+            <origin xyz="-0.00499999999999992 -3.552713678800501e-17 0.0" rpy="1.9567680809016747e-15 1.5707963267948966 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/propeller_s1.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="propeller_s1_collision">
-            <origin xyz="-0.0049999999999999645 -1.4210854715202004e-16 -8.881784197001253e-18" rpy="1.956768080901675e-15 1.5707963267948966 0" />
+            <origin xyz="-0.00499999999999992 -3.552713678800501e-17 0.0" rpy="1.9567680809016747e-15 1.5707963267948966 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/propeller_s1.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -178,42 +180,20 @@
     </link>
     <link name="propeller_s2">
         <inertial>
-            <origin xyz="0.007137040608511391 -6.479110560242418e-07 7.25891127006939e-07" rpy="0.0 -0.0 0.0" />
+            <origin xyz="0.007137040608511481 -6.479110559531875e-07 7.258911272822744e-07" rpy="0.0 -0.0 0.0" />
             <mass value="0.007313123520405363" />
-            <inertia ixx="2.712594343423744e-06" iyy="1.5638676882400772e-06" izz="1.5636332278421762e-06" ixy="2.0918329134839153e-11" iyz="-9.069929488312927e-11" ixz="-2.4984636121740166e-11" />
+            <inertia ixx="2.712594343423771e-06" iyy="1.5638676882400772e-06" izz="1.5636332278422033e-06" ixy="2.0918329134839153e-11" iyz="-9.069929488312927e-11" ixz="-2.49846361200461e-11" />
         </inertial>
         <visual name="propeller_s2_visual">
-            <origin xyz="-0.005000000000000258 -1.5987211554602254e-16 8.881784197001253e-18" rpy="1.956768080901673e-15 1.5707963267948966 0" />
+            <origin xyz="-0.005000000000000169 -8.881784197001253e-17 2.842170943040401e-16" rpy="1.9567680809016727e-15 1.5707963267948966 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/propeller_s2.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="propeller_s2_collision">
-            <origin xyz="-0.005000000000000258 -1.5987211554602254e-16 8.881784197001253e-18" rpy="1.956768080901673e-15 1.5707963267948966 0" />
+            <origin xyz="-0.005000000000000169 -8.881784197001253e-17 2.842170943040401e-16" rpy="1.9567680809016727e-15 1.5707963267948966 0" />
             <geometry>
                 <mesh filename="file://$(find robot_description)/meshes/propeller_s2.stl" scale="0.001 0.001 0.001" />
-            </geometry>
-        </collision>
-    </link>
-    <link name="stone">
-        <inertial>
-            <origin xyz="-0.0030000000000001076 -3.552713678800501e-17 0.0408968735" rpy="0.0 -0.0 0.0" />
-            <mass value="2.5" />
-            <inertia ixx="0.004789817049047298" iyy="0.0047898170490472975" izz="0.004789817049047303" ixy="-4.283720045350492e-18" iyz="4.2837200453504926e-18" ixz="-5.7462715141731735e-18" />
-        </inertial>
-        <visual name="stone_visual">
-            <origin xyz="-0.003000000000000116 -3.552713678800501e-17 0.0" rpy="3.141592653589793 -0.0 0.0" />
-            <geometry>
-                <mesh filename="file://$(find robot_description)/meshes/stone.stl" scale="0.001 0.001 0.001" />
-            </geometry>
-            <material name="black_material">
-                <color rgba="0.0 0.0 0.0 1.0"/>
-            </material>
-        </visual>
-        <collision name="stone_collision">
-            <origin xyz="-0.003000000000000116 -3.552713678800501e-17 0.0" rpy="3.141592653589793 -0.0 0.0" />
-            <geometry>
-                <mesh filename="file://$(find robot_description)/meshes/stone.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -250,21 +230,16 @@
         <axis xyz="0.0 8.758115402030107e-47 -1.0" />
     </joint>
     <joint name="cannister_s1_Revolute-7" type="continuous">
-        <origin xyz="0.051062500000000004 0.0 0.07" rpy="1.5707963267948966 -3.489561605495647e-47 3.944304526105059e-31" />
+        <origin xyz="0.026062500000000002 0.0 0.07" rpy="1.5707963267948966 -0.0 3.9443045261050433e-31" />
         <parent link="cannister_s1" />
         <child link="propeller_s1" />
-        <axis xyz="1.0 0.0 3.672378311415789e-31" />
+        <axis xyz="1.0 0.0 3.6723783114158043e-31" />
     </joint>
     <joint name="cannister_s2_Revolute-8" type="continuous">
-        <origin xyz="0.051062500000000004 0.0 0.07" rpy="-1.5707963267948966 -4.667261458395856e-61 3.944304526105059e-31" />
+        <origin xyz="0.026062500000000002 0.0 0.07" rpy="-1.5707963267948966 -0.0 3.94430452610506e-31" />
         <parent link="cannister_s2" />
         <child link="propeller_s2" />
-        <axis xyz="1.0 0.0 -3.6723783114154653e-31" />
-    </joint>
-    <joint name="base_link_Rigid-9" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="3.141592653589793 -0.0 0.0" />
-        <parent link="base_link" />
-        <child link="stone" />
+        <axis xyz="1.0 0.0 -3.6723783114154644e-31" />
     </joint>
 
 </robot>

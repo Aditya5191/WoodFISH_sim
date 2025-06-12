@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="AUV">
 
-  <!-- Thruster Plugin for Propeller S1 (T1) - RIGHT SIDE -->
+  <!-- Thruster Plugin for Propeller S1 (T1) -->
   <gazebo>
     <plugin
         filename="gz-sim-thruster-system"
         name="gz::sim::systems::Thruster">
-        <topic>thrusters/t1/thrust</topic>  
+        <topic>thrusters/t1/thrust</topic>
         <joint_name>cannister_s1_Revolute-7</joint_name>
         <thrust_coefficient>1</thrust_coefficient>
         <fluid_density>1000</fluid_density>
@@ -14,12 +14,12 @@
     </plugin>
   </gazebo>
 
-  <!-- Thruster Plugin for Propeller S2 (T2) - LEFT SIDE -->
+  <!-- Thruster Plugin for Propeller S2 (T2) -->
   <gazebo>
     <plugin
         filename="gz-sim-thruster-system"
         name="gz::sim::systems::Thruster">
-        <topic>thrusters/t2/thrust</topic>  
+        <topic>thrusters/t2/thrust</topic>
         <joint_name>cannister_s2_Revolute-8</joint_name>
         <thrust_coefficient>1</thrust_coefficient>
         <fluid_density>1000</fluid_density>
@@ -27,12 +27,12 @@
     </plugin>
   </gazebo>
 
-  <!-- Thruster Plugin for Propeller M2 (T3) - REAR MAIN -->
+  <!-- Thruster Plugin for Propeller M2 (T3) -->
   <gazebo>
     <plugin
         filename="gz-sim-thruster-system"
         name="gz::sim::systems::Thruster">
-        <topic>thrusters/t3/thrust</topic>  
+        <topic>thrusters/t3/thrust</topic>
         <joint_name>canister_m2_Revolute-5</joint_name>
         <thrust_coefficient>1</thrust_coefficient>
         <fluid_density>1000</fluid_density>
@@ -40,19 +40,20 @@
     </plugin>
   </gazebo>
 
-  <!-- Thruster Plugin for Propeller M1 (T4) - FRONT MAIN -->
+  <!-- Thruster Plugin for Propeller M1 (T4) -->
   <gazebo>
     <plugin
         filename="gz-sim-thruster-system"
         name="gz::sim::systems::Thruster">
-        <topic>thrusters/t4/thrust</topic>  
+        <topic>thrusters/t4/thrust</topic>
         <joint_name>canister_m1_Revolute-6</joint_name>
         <thrust_coefficient>1</thrust_coefficient>
         <fluid_density>1000</fluid_density>
         <propeller_diameter>0.13</propeller_diameter>
     </plugin>
   </gazebo>
-
+  
+  
   <!-- Optional: Hydrodynamics -->
   <gazebo>
     <plugin
@@ -79,9 +80,9 @@
                 <zWabsW>-5</zWabsW>
 
                 <!-- Angular drag -->
-                <kP>-10</kP>
-                <mQ>-10</mQ>
-                <nR>-10</nR>
+                <kP>-0.07</kP>
+                <mQ>-0.07</mQ>
+                <nR>-0.07</nR>
 
                 <!-- Quadratic angular drag -->
                 <kPabsP>-0.5</kPabsP>
