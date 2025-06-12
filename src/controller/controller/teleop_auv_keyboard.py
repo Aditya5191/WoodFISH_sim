@@ -62,7 +62,7 @@ def get_pure_movement(key):
         },
         'e': {  # Pure Descent
             'description': 'Pure Descent', 
-            'forces': [0.0, 0.0, 2.0, 2.0]  
+            'forces': [0.0, 0.0, 8.0, 8.0]  
         },
         'w': {  # Pure Forward
             'description': 'Pure Forward', 
