@@ -71,7 +71,7 @@ def get_pure_movement(keys):
 
     movements = {
         'q': {'description': 'Pure Ascent', 'forces': [0.0, 0.0, -2.0, -2.0]},
-        'e': {'description': 'Pure Descent', 'forces': [0.0, 0.0, 2.0, 2.0]},
+        'e': {'description': 'Pure Descent', 'forces': [0.0, 0.0, 6.0, 6.0]},
         'w': {'description': 'Pure Forward', 'forces': [2.0, 2.0, 0.0, 0.0]},
         'a': {'description': 'Pure Left', 'forces': [-10.0, 10.0, 0.0, 0.0]},
         's': {'description': 'Stop', 'forces': [0.0, 0.0, 0.0, 0.0]},
@@ -85,7 +85,7 @@ def get_pure_movement(keys):
         return None
     
     if len(keys) == 1:
-        return movements.get(keys, None)  
+        return movements.get(keys[0], None)  
     
     if len(keys) == 2:
         key1, key2 = keys[0], keys[1]
