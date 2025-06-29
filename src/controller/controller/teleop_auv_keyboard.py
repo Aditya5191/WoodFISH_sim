@@ -6,6 +6,7 @@ import sys
 from std_msgs.msg import Float64MultiArray
 import rclpy
 from rclpy.qos import QoSProfile
+import time
 
 if os.name == 'nt':
     import msvcrt
@@ -16,12 +17,11 @@ else:
 # ---- THIS PROGRAM ACTS AS INTERFACE , TAKES INPUT AND SENDS IT TO THRUSTER CONTROL FOR OUTPUT 
 
 msg = """
-Control Your AUV - 6 Pure Movements!
+BASIC CONTROLS
 ------------------------------------
-   q
+q  w  e
 a  s  d
    x
-   e
 
 q: Pure Ascent
 e: Pure Descent  
@@ -50,87 +50,97 @@ def get_key(settings):
 def print_movement(description, forces):
     print(f'{description} - T1:{forces[0]:.1f}, T2:{forces[1]:.1f}, T3:{forces[2]:.1f}, T4:{forces[3]:.1f}')
 
-def get_pure_movement(key):
+def multi_keys(settings, timeout=0.3):
+    keys = []
+    start = time.time()  
     
+    while len(keys) < 2 and (time.time() - start) < timeout:
+        key = get_key(settings)
+        if key == '\x03': 
+            return '\x03'
+        if key:
+            keys.append(key)  
+            if len(keys) == 1:
+                start = time.time()  
+    
+    return ''.join(keys)  
+
+def get_pure_movement(keys):
 
     # ---- TWEAK THE VALUES AS NEEDED ----
 
     movements = {
-        'q': {  # Pure Ascent 
-            'description': 'Pure Ascent', 
-            'forces': [0.0, 0.0, -2.0, -2.0]  
-        },
-        'e': {  # Pure Descent
-            'description': 'Pure Descent', 
-            'forces': [0.0, 0.0, 8.0, 8.0]  
-        },
-        'w': {  # Pure Forward
-            'description': 'Pure Forward', 
-            'forces': [2.0, 2.0, 0.0, 0.0]  
-        },
-        'a': {  # Pure Left
-            'description': 'Pure Left', 
-            'forces': [-10.0, 10.0, 0.0, 0.0]  
-        },
-        's': {  # Stop
-            'description': 'Stop', 
-            'forces': [0.0, 0.0, 0.0, 0.0]  
-        },
-        'd': {  # Pure Right
-            'description': 'Pure Right', 
-            'forces': [10.0, -10.0, 0.0, 0.0]  
-        },
-        'x': {  # Pure Backward
-            'description': 'Pure Backward', 
-            'forces': [-2.0, -2.0, 0.0, 0.0]  
-        }
+        'q': {'description': 'Pure Ascent', 'forces': [0.0, 0.0, -2.0, -2.0]},
+        'e': {'description': 'Pure Descent', 'forces': [0.0, 0.0, 6.0, 6.0]},
+        'w': {'description': 'Pure Forward', 'forces': [2.0, 2.0, 0.0, 0.0]},
+        'a': {'description': 'Pure Left', 'forces': [-10.0, 10.0, 0.0, 0.0]},
+        's': {'description': 'Stop', 'forces': [0.0, 0.0, 0.0, 0.0]},
+        'd': {'description': 'Pure Right', 'forces': [10.0, -10.0, 0.0, 0.0]},
+        'x': {'description': 'Pure Backward', 'forces': [-2.0, -2.0, 0.0, 0.0]}
     }
     
-    return movements.get(key, None)
-
-
+    # ---- HANDLING MULTI KEYS (STRICTLY 2 KEYS AS OF NOW) ----
+    
+    if not keys:
+        return None
+    
+    if len(keys) == 1:
+        return movements.get(keys[0], None)  
+    
+    if len(keys) == 2:
+        key1, key2 = keys[0], keys[1]
+        
+        if 's' in keys:
+            return movements['s']  
+        
+        move1 = movements.get(key1)  
+        move2 = movements.get(key2)  
+        
+        if move1 and move2:
+            combined_forces = [
+                move1['forces'][i] + move2['forces'][i] 
+                for i in range(4)
+            ]
+            
+            return {
+                'description': f"{move1['description']} + {move2['description']}",
+                'forces': combined_forces
+            }
+    
+    return None
 
 def main():
     settings = None
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
-    
-    # ---- REFER TO TURTLEBOT3 TELEOP_kEYBOARD FOR BETTER UNDERSTANDING OF THE CODE ----
 
     rclpy.init()
     qos = QoSProfile(depth=10)
     node = rclpy.create_node('teleop_auv_pure')
     
-    # Publisher for TSUP commands
     pub = node.create_publisher(Float64MultiArray, '/cmd_tsup', qos)
 
-    # Current forces
-    current_forces = [0.0, 0.0, 0.0, 0.0]
-
     try:
-
-        # ---- CHANGE THE PRINT MSG AS YOU TWEAK THE VALUES----
-
         print(msg)
-        print("CORRECTED Forces:")
-        print("- Ascent/Descent: ±5.0N")
-        print("- Forward/Backward: ±5.0N") 
-        print("- Left/Right: 8.0N")
+        print("Forces: Ascent/Descent/Forward/Backward: ±2.0N | Left/Right: ±10.0N")
+        
         while True:
-            key = get_key(settings)
+            keys = multi_keys(settings)  
             
-            if key == '\x03':  # CTRL + C
+            if keys == '\x03':  # CTRL + C
                 break
             
-            movement = get_pure_movement(key)
-            
-            if movement:
-                current_forces = movement['forces']
-                print_movement(movement['description'], current_forces)
+            if keys: 
+                movement = get_pure_movement(keys)
+                if movement:
+                    current_forces = movement['forces']
+                    print_movement(movement['description'], current_forces)
                 
-                tsup_msg = Float64MultiArray()
-                tsup_msg.data = current_forces
-                pub.publish(tsup_msg)
+                    tsup_msg = Float64MultiArray()
+                    tsup_msg.data = current_forces
+                    pub.publish(tsup_msg)
+                else:
+                    print(f"Invalid key combination: '{keys}'")
 
     except Exception as e:
         print(e)
