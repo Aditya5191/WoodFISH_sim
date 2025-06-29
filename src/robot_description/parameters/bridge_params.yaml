@@ -49,6 +49,23 @@
   direction: "GZ_TO_ROS"
 
 
+ #Frontier camera topics
+  # # #gz topic published by camera plugin
+- ros_topic_name: "camera/image_front_raw"
+  gz_topic_name: "/camera_front/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: "GZ_TO_ROS"
+
+
+  #Down Camera topics
+- ros_topic_name: "camera/image_down_raw"
+  gz_topic_name: "/camera_down/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: "GZ_TO_ROS"
+
+
 
 
 
@@ -81,12 +98,7 @@
 #   gz_type_name: "gz.msgs.Twist"
 #   direction: "ROS_TO_GZ"
 
-# # #gz topic published by camera plugin
-- ros_topic_name: "camera/image_raw"
-  gz_topic_name: "/camera/image"
-  ros_type_name: "sensor_msgs/msg/Image"
-  gz_type_name: "gz.msgs.Image"
-  direction: "GZ_TO_ROS"
+
 
 # # gz topic published by LiDAR plugin
 # - ros_topic_name: "/scan"
